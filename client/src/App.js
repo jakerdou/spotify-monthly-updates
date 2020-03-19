@@ -13,7 +13,7 @@ class App extends React.Component {
     this.state = {
       loggedIn: params.access_token ? true : false,
       nowPlaying: {
-        name: "Not Checked",
+        name: "Not Checked Yet",
         image: ""
       }
     }
