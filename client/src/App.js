@@ -1,12 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import $ from "jquery";
 import Spotify from 'spotify-web-api-js';
 
 const spot = new Spotify();
 
-//{tracks.map(track => track.artists.map(artist => <div>{artist.name}</div>))}
-
+/* curl request for top tracks the last 4 months
+curl -X GET "https://api.spotify.com/v1/me/top/tracks?time_range=short_term" -H "Authorization: Bearer BQDza7TUGEiKKqcOlbLKTxiBLi-MKe6NuVvwNtLX1mw1J0hAWlGoe71U3QLlKSfglJK9_2wjGDQKxTwRyNVzORpCum1D4PMF87gF89mBPTLxcwpYm6Bpai0c8YtrnrfaGkj5-KfY8dGd1Fja4IejjpGVfp5gV7CqkGqRNNesmBaETcBryNQpmSoDr4EGdu_z"
+*/
 
 class App extends React.Component {
   constructor(){
@@ -21,16 +23,26 @@ class App extends React.Component {
       },
       topTracks: {
         items: [
-          {name: "Not Checked Yet"},
-          {artists: [{name: ""}]}
+          {name: "Not Checked Yet"}
         ]
-      }
+      },
     }
 
     if (params.access_token) {
       spot.setAccessToken(params.access_token);
     }
   }
+
+// this works to call the api
+  // componentDidMount() {
+  //  fetch('https://dog.ceo/api/breeds/image/random')
+  //    .then(res => res.json())
+  //    .then(
+  //      (response) => {
+  //        console.log(response)
+  //      }
+  //    )
+  // }
 
   getHashParams() {
     var hashParams = {};
@@ -77,6 +89,28 @@ class App extends React.Component {
       })
   }
 
+  // need to figure out how to get ajax to work to get the short_term request to work
+  getMyTopTracksMonthly() {
+    var accessToken = this.getHashParams().access_token;
+    var self = this;
+
+    $.ajax({
+        type: 'GET',
+        url: 'https://dog.ceo/api/breeds/image/random',
+        url: 'https://api.spotify.com/v1/me/top/tracks?time_range=short_term',
+        headers: {
+          'Authorization': 'Bearer ' + accessToken
+        },
+        success: function(response) {
+          self.setState({
+            topTracks: {
+              items: response.items
+            }
+          })
+        }
+    });
+  }
+
   render(){
     var tracks = this.state.topTracks.items;
 
@@ -94,8 +128,8 @@ class App extends React.Component {
         </button>
 
         <div>
-          <button onClick = {() => this.getTopTracks()}>
-            Get Top Tracks
+          <button onClick = {() => this.getMyTopTracksMonthly()}>
+            Get Top Tracks For Last Month
           </button>
           <div>My Top Tracks:</div>
           <div>
