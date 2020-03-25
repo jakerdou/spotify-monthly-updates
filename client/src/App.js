@@ -4,6 +4,9 @@ import './App.css';
 import $ from "jquery";
 import Spotify from 'spotify-web-api-js';
 
+import Badge from 'react-bootstrap/Badge'
+import Button from 'react-bootstrap/Button' //TODO: get button to work to call topTracks
+
 const spot = new Spotify();
 
 class App extends React.Component {
@@ -74,7 +77,6 @@ class App extends React.Component {
       })
   }
 
-  // need to figure out how to get ajax to work to get the short_term request to work
   getMyTopTracksMonthly() {
     var accessToken = this.getHashParams().access_token;
     var self = this;
@@ -102,20 +104,23 @@ class App extends React.Component {
     return (
       <div className="App">
         <a href = "http://localhost:8888">
-          <button>Login With Spotify</button>
+          <Button variant="outline-secondary">Login With Spotify</Button>
         </a>
         <div>Now Playing: {this.state.nowPlaying.name}</div>
         <div>
           <img src = {this.state.nowPlaying.image}/>
         </div>
-        <button onClick = {() => this.getNowPlaying()}>
+        <Button variant="outline-secondary" onClick = {() => this.getNowPlaying()}>
           Check What's Playing
-        </button>
+        </Button>
 
         <div>
-          <button onClick = {() => this.getMyTopTracksMonthly()}>
+          <Button variant="outline-secondary" onClick = {() => this.getMyTopTracksMonthly()}>
             Get Top Tracks For Last Month
-          </button>
+          </Button>
+          <Badge pill variant="primary">
+            New
+          </Badge>
           <div>My Top Tracks:</div>
           <div>
             {tracks.map(track =>
