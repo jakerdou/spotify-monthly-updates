@@ -6,10 +6,6 @@ import Spotify from 'spotify-web-api-js';
 
 const spot = new Spotify();
 
-/* curl request for top tracks the last 4 months
-curl -X GET "https://api.spotify.com/v1/me/top/tracks?time_range=short_term" -H "Authorization: Bearer BQDza7TUGEiKKqcOlbLKTxiBLi-MKe6NuVvwNtLX1mw1J0hAWlGoe71U3QLlKSfglJK9_2wjGDQKxTwRyNVzORpCum1D4PMF87gF89mBPTLxcwpYm6Bpai0c8YtrnrfaGkj5-KfY8dGd1Fja4IejjpGVfp5gV7CqkGqRNNesmBaETcBryNQpmSoDr4EGdu_z"
-*/
-
 class App extends React.Component {
   constructor(){
     super();
@@ -32,17 +28,6 @@ class App extends React.Component {
       spot.setAccessToken(params.access_token);
     }
   }
-
-// this works to call the api
-  // componentDidMount() {
-  //  fetch('https://dog.ceo/api/breeds/image/random')
-  //    .then(res => res.json())
-  //    .then(
-  //      (response) => {
-  //        console.log(response)
-  //      }
-  //    )
-  // }
 
   getHashParams() {
     var hashParams = {};
