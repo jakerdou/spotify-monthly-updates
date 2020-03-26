@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './ArtistList.css';
 import $ from "jquery";
 import Spotify from 'spotify-web-api-js';
@@ -86,7 +85,7 @@ class ArtistList extends React.Component {
             <ListGroup>
               <ListGroup.Item>{artist.name}</ListGroup.Item>
             </ListGroup>
-          )};
+          )}
         </div>
       </div>
     );

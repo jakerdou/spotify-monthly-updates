@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './TrackList.css';
 import $ from "jquery";
 import Spotify from 'spotify-web-api-js';
@@ -85,7 +84,7 @@ class TrackList extends React.Component {
             <ListGroup>
               <ListGroup.Item>{track.name}</ListGroup.Item>
             </ListGroup>
-          )};
+          )}
         </div>
       </div>
     );

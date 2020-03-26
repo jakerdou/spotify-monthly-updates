@@ -1,9 +1,7 @@
 //TODO: get shell script to run all necessary things
 import React from 'react';
-import logo from './logo.svg';
 import './LogInBar.css';
 
-import Button from 'react-bootstrap/Button'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 
 class LogInBar extends React.Component {
