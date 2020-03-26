@@ -5,10 +5,6 @@ import './App.css';
 import $ from "jquery";
 import Spotify from 'spotify-web-api-js';
 
-import Badge from 'react-bootstrap/Badge'
-import Button from 'react-bootstrap/Button'
-import ListGroup from 'react-bootstrap/ListGroup'
-
 const spot = new Spotify();
 
 class App extends React.Component {

@@ -4,8 +4,13 @@
   padding-left: 5%;
   padding-top: 3%;
   padding-bottom: 3%;
+  color: #1DB954;
 }
 
 #alrt {
   color: red
+}
+
+#topTrackBut {
+  color: #1DB954;
 }

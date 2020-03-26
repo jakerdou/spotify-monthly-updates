@@ -1,4 +1,3 @@
-//TODO: add topArtists
 import React from 'react';
 import logo from './logo.svg';
 import './ArtistList.css';
@@ -77,7 +76,7 @@ class ArtistList extends React.Component {
       <div className="ArtistList">
         <div id="alrt">{this.state.alert}</div>
 
-        <Button variant="outline-secondary" onClick = {() => this.getMyTopArtistsMonthly()}>
+        <Button variant="outline-secondary" onClick = {() => this.getMyTopArtistsMonthly()} id="topArtBut">
           Get Top Artists For Last Month
         </Button>
 
