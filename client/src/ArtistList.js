@@ -1,9 +1,11 @@
+//TODO: add topArtists
 import React from 'react';
 import logo from './logo.svg';
 import './ArtistList.css';
 import $ from "jquery";
 import Spotify from 'spotify-web-api-js';
 
+import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup'
 
 const spot = new Spotify();
@@ -14,7 +16,13 @@ class ArtistList extends React.Component {
     const params = this.getHashParams();
 
     this.state = {
-      loggedIn: params.access_token ? true : false
+      loggedIn: params.access_token ? true : false,
+      topArtists: {
+        items: [
+          {name: "Not Checked Yet"}
+        ]
+      },
+      alert: ""
     }
 
     if (params.access_token) {
@@ -33,13 +41,46 @@ class ArtistList extends React.Component {
     return hashParams;
   }
 
+  getMyTopArtistsMonthly() {
+
+    if(this.state.loggedIn == true) {
+      var accessToken = this.getHashParams().access_token;
+      var self = this;
+
+      $.ajax({
+          type: 'GET',
+          url: 'https://api.spotify.com/v1/me/top/artists?time_range=short_term',
+          headers: {
+            'Authorization': 'Bearer ' + accessToken
+          },
+          success: function(response) {
+            self.setState({
+              topArtists: {
+                items: response.items
+              }
+            })
+          }
+      });
+    }
+    else {
+      this.setState({
+        alert: "You must log in before using this feature"
+      })
+    }
+  }
+
   render(){
 
     //go back and look at ListGroup for more info
     return (
       <div className="ArtistList">
-        <h3 id="TopArts">Your Top Artists:</h3>
+        <div id="alrt">{this.state.alert}</div>
 
+        <Button variant="outline-secondary" onClick = {() => this.getMyTopArtistsMonthly()}>
+          Get Top Artists For Last Month
+        </Button>
+
+        <h3 id="TopArts">Your Top Artists:</h3>
         <ListGroup>
           <ListGroup.Item>Roddy Ricch</ListGroup.Item>
           <ListGroup.Item>artist2</ListGroup.Item>
