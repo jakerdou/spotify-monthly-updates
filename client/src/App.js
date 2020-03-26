@@ -7,6 +7,7 @@ import Spotify from 'spotify-web-api-js';
 
 import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
+import ListGroup from 'react-bootstrap/ListGroup'
 
 const spot = new Spotify();
 
@@ -17,10 +18,6 @@ class App extends React.Component {
 
     this.state = {
       loggedIn: params.access_token ? true : false,
-      nowPlaying: {
-        name: "Not Checked Yet",
-        image: ""
-      },
       topTracks: {
         items: [
           {name: "Not Checked Yet"}
@@ -44,47 +41,12 @@ class App extends React.Component {
     return hashParams;
   }
 
-  getNowPlaying() {
-    spot.getMyCurrentPlayingTrack()
-      .then((response) => {
-        if(response){
-          this.setState({
-            nowPlaying: {
-              name: response.item.name,
-              image: response.item.album.images[0].url
-            }
-          })
-        }
-        else{
-          this.setState({
-            nowPlaying: {
-              name: "none",
-              image: ""
-            }
-          })
-        }
-      })
-  }
-
-  getTopTracks() {
-    spot.getMyTopTracks()
-      .then((response) => {
-        //for some reason i cant read the artists
-        this.setState({
-          topTracks: {
-            items: response.items
-          }
-        })
-      })
-  }
-
   getMyTopTracksMonthly() {
     var accessToken = this.getHashParams().access_token;
     var self = this;
 
     $.ajax({
         type: 'GET',
-        url: 'https://dog.ceo/api/breeds/image/random',
         url: 'https://api.spotify.com/v1/me/top/tracks?time_range=short_term',
         headers: {
           'Authorization': 'Bearer ' + accessToken
@@ -107,26 +69,19 @@ class App extends React.Component {
         <a href = "http://localhost:8888">
           <Button variant="outline-secondary">Login With Spotify</Button>
         </a>
-        <div>Now Playing: {this.state.nowPlaying.name}</div>
-        <div>
-          <img src = {this.state.nowPlaying.image}/>
-        </div>
-        <Button variant="outline-secondary" onClick = {() => this.getNowPlaying()}>
-          Check What's Playing
-        </Button>
 
         <div>
           <Button variant="outline-secondary" onClick = {() => this.getMyTopTracksMonthly()}>
             Get Top Tracks For Last Month
           </Button>
-          <Badge pill variant="primary">
-            New
-          </Badge>
+
           <div>My Top Tracks:</div>
           <div>
             {tracks.map(track =>
-              <div>{track.name}
-              </div>)}
+              <ListGroup>
+                <ListGroup.Item>{track.name}</ListGroup.Item>
+              </ListGroup>
+            )};
           </div>
         </div>
       </div>
