@@ -74,7 +74,7 @@ class TrackList extends React.Component {
       <div className="TrackList">
         <div id="alrt">{this.state.alert}</div>
 
-        <Button variant="outline-secondary" onClick = {() => this.getMyTopTracksMonthly()} id="topTrackBut">
+        <Button variant="outline-dark" onClick = {() => this.getMyTopTracksMonthly()} id="topTrackBut">
           Get Top Tracks For Last Month
         </Button>
 

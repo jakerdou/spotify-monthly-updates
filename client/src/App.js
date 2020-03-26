@@ -3,6 +3,10 @@ import React from 'react';
 import './App.css';
 import Spotify from 'spotify-web-api-js';
 
+import LogInBar from './LogInBar'
+import ArtistList from './ArtistList'
+import TrackList from './TrackList'
+
 const spot = new Spotify();
 
 class App extends React.Component {
@@ -34,6 +38,9 @@ class App extends React.Component {
 
     return (
       <div className="App">
+        <LogInBar />
+        <ArtistList />
+        <TrackList />
       </div>
     );
   }

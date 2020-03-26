@@ -75,7 +75,7 @@ class ArtistList extends React.Component {
       <div className="ArtistList">
         <div id="alrt">{this.state.alert}</div>
 
-        <Button variant="outline-secondary" onClick = {() => this.getMyTopArtistsMonthly()} id="topArtBut">
+        <Button variant="outline-dark" onClick = {() => this.getMyTopArtistsMonthly()} id="topArtBut">
           Get Top Artists For Last Month
         </Button>
 

@@ -7,9 +7,10 @@
 }
 
 #loginJTron {
-  color: #1DB954;
+  background-color: #1DB954 !important;
 }
 
 #loginLink {
+  color: black;
   text-decoration: none;
 }
