@@ -17,6 +17,11 @@ class ArtistList extends React.Component {
 
     this.state = {
       loggedIn: params.access_token ? true : false,
+      topArtists: {
+        items: [
+          {name: "Not Checked Yet"}
+        ]
+      },
       alert: ""
     }
 
@@ -50,7 +55,7 @@ class ArtistList extends React.Component {
           },
           success: function(response) {
             self.setState({
-              topTracks: {
+              topArtists: {
                 items: response.items
               }
             })
