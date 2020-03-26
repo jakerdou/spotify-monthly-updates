@@ -1,12 +1,14 @@
+//TODO: get shell script to run all necessary things
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import $ from "jquery";
 import Spotify from 'spotify-web-api-js';
 
+import Badge from 'react-bootstrap/Badge'
+import Button from 'react-bootstrap/Button'
+
 const spot = new Spotify();
-
-//{tracks.map(track => track.artists.map(artist => <div>{artist.name}</div>))}
-
 
 class App extends React.Component {
   constructor(){
@@ -21,10 +23,9 @@ class App extends React.Component {
       },
       topTracks: {
         items: [
-          {name: "Not Checked Yet"},
-          {artists: [{name: ""}]}
+          {name: "Not Checked Yet"}
         ]
-      }
+      },
     }
 
     if (params.access_token) {
@@ -77,26 +78,50 @@ class App extends React.Component {
       })
   }
 
+  getMyTopTracksMonthly() {
+    var accessToken = this.getHashParams().access_token;
+    var self = this;
+
+    $.ajax({
+        type: 'GET',
+        url: 'https://dog.ceo/api/breeds/image/random',
+        url: 'https://api.spotify.com/v1/me/top/tracks?time_range=short_term',
+        headers: {
+          'Authorization': 'Bearer ' + accessToken
+        },
+        success: function(response) {
+          self.setState({
+            topTracks: {
+              items: response.items
+            }
+          })
+        }
+    });
+  }
+
   render(){
     var tracks = this.state.topTracks.items;
 
     return (
       <div className="App">
         <a href = "http://localhost:8888">
-          <button>Login With Spotify</button>
+          <Button variant="outline-secondary">Login With Spotify</Button>
         </a>
         <div>Now Playing: {this.state.nowPlaying.name}</div>
         <div>
           <img src = {this.state.nowPlaying.image}/>
         </div>
-        <button onClick = {() => this.getNowPlaying()}>
+        <Button variant="outline-secondary" onClick = {() => this.getNowPlaying()}>
           Check What's Playing
-        </button>
+        </Button>
 
         <div>
-          <button onClick = {() => this.getTopTracks()}>
-            Get Top Tracks
-          </button>
+          <Button variant="outline-secondary" onClick = {() => this.getMyTopTracksMonthly()}>
+            Get Top Tracks For Last Month
+          </Button>
+          <Badge pill variant="primary">
+            New
+          </Badge>
           <div>My Top Tracks:</div>
           <div>
             {tracks.map(track =>
