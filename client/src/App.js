@@ -3,9 +3,9 @@ import React from 'react';
 import './App.css';
 import Spotify from 'spotify-web-api-js';
 
-import LogInBar from './LogInBar'
-import ArtistList from './ArtistList'
-import TrackList from './TrackList'
+import LogInBar from './components/LogInBar'
+import ArtistList from './components/ArtistList'
+import TrackList from './components/TrackList'
 
 const spot = new Spotify();
 
