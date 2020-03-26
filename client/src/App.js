@@ -18,10 +18,6 @@ class App extends React.Component {
 
     this.state = {
       loggedIn: params.access_token ? true : false,
-      nowPlaying: {
-        name: "Not Checked Yet",
-        image: ""
-      },
       topTracks: {
         items: [
           {name: "Not Checked Yet"}
@@ -43,40 +39,6 @@ class App extends React.Component {
     }
 
     return hashParams;
-  }
-
-  getNowPlaying() {
-    spot.getMyCurrentPlayingTrack()
-      .then((response) => {
-        if(response){
-          this.setState({
-            nowPlaying: {
-              name: response.item.name,
-              image: response.item.album.images[0].url
-            }
-          })
-        }
-        else{
-          this.setState({
-            nowPlaying: {
-              name: "none",
-              image: ""
-            }
-          })
-        }
-      })
-  }
-
-  getTopTracks() {
-    spot.getMyTopTracks()
-      .then((response) => {
-        //for some reason i cant read the artists
-        this.setState({
-          topTracks: {
-            items: response.items
-          }
-        })
-      })
   }
 
   getMyTopTracksMonthly() {
@@ -107,13 +69,6 @@ class App extends React.Component {
         <a href = "http://localhost:8888">
           <Button variant="outline-secondary">Login With Spotify</Button>
         </a>
-        <div>Now Playing: {this.state.nowPlaying.name}</div>
-        <div>
-          <img src = {this.state.nowPlaying.image}/>
-        </div>
-        <Button variant="outline-secondary" onClick = {() => this.getNowPlaying()}>
-          Check What's Playing
-        </Button>
 
         <div>
           <Button variant="outline-secondary" onClick = {() => this.getMyTopTracksMonthly()}>
