@@ -70,6 +70,7 @@ class ArtistList extends React.Component {
   }
 
   render(){
+    var artists = this.state.topArtists.items
 
     //go back and look at ListGroup for more info
     return (
@@ -81,13 +82,13 @@ class ArtistList extends React.Component {
         </Button>
 
         <h3 id="TopArts">Your Top Artists:</h3>
-        <ListGroup>
-          <ListGroup.Item>Roddy Ricch</ListGroup.Item>
-          <ListGroup.Item>artist2</ListGroup.Item>
-          <ListGroup.Item>artist3</ListGroup.Item>
-          <ListGroup.Item>artist4</ListGroup.Item>
-          <ListGroup.Item>artist5</ListGroup.Item>
-        </ListGroup>
+        <div>
+          {artists.map(artist =>
+            <ListGroup>
+              <ListGroup.Item>{artist.name}</ListGroup.Item>
+            </ListGroup>
+          )};
+        </div>
       </div>
     );
   }
