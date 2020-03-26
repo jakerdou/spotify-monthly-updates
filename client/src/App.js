@@ -1,3 +1,4 @@
+//TODO: get shell script to run all necessary things
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
@@ -5,7 +6,7 @@ import $ from "jquery";
 import Spotify from 'spotify-web-api-js';
 
 import Badge from 'react-bootstrap/Badge'
-import Button from 'react-bootstrap/Button' //TODO: get button to work to call topTracks
+import Button from 'react-bootstrap/Button'
 
 const spot = new Spotify();
 
