@@ -1,5 +1,5 @@
-# MySpotifyApp
-A work in progress project to learn more about the Spotify Dev API
+# SpotifyMonthlyUpdates
+A web application that will inform you of your listening habits for the last month on Spotify
 
 To start the app:
 

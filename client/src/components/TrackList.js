@@ -6,12 +6,14 @@ import Spotify from 'spotify-web-api-js';
 import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup'
 
+import {getHashParams} from '../functions.js'
+
 const spot = new Spotify();
 
 class TrackList extends React.Component {
   constructor(){
     super();
-    const params = this.getHashParams();
+    const params = getHashParams();
 
     this.state = {
       loggedIn: params.access_token ? true : false,
@@ -28,21 +30,10 @@ class TrackList extends React.Component {
     }
   }
 
-  getHashParams() {
-    var hashParams = {};
-    var e, r = /([^&;=]+)=?([^&;]*)/g,
-        q = window.location.hash.substring(1);
-    while ( e = r.exec(q)) {
-       hashParams[e[1]] = decodeURIComponent(e[2]);
-    }
-
-    return hashParams;
-  }
-
   getMyTopTracksMonthly() {
 
-    if(this.state.loggedIn == true) {
-      var accessToken = this.getHashParams().access_token;
+    if(this.state.loggedIn === true) {
+      var accessToken = getHashParams().access_token;
       var self = this;
 
       $.ajax({
