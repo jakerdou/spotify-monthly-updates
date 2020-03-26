@@ -17,12 +17,7 @@ class App extends React.Component {
     const params = this.getHashParams();
 
     this.state = {
-      loggedIn: params.access_token ? true : false,
-      topTracks: {
-        items: [
-          {name: "Not Checked Yet"}
-        ]
-      },
+      loggedIn: params.access_token ? true : false
     }
 
     if (params.access_token) {
@@ -41,49 +36,13 @@ class App extends React.Component {
     return hashParams;
   }
 
-  getMyTopTracksMonthly() {
-    var accessToken = this.getHashParams().access_token;
-    var self = this;
-
-    $.ajax({
-        type: 'GET',
-        url: 'https://api.spotify.com/v1/me/top/tracks?time_range=short_term',
-        headers: {
-          'Authorization': 'Bearer ' + accessToken
-        },
-        success: function(response) {
-          self.setState({
-            topTracks: {
-              items: response.items
-            }
-          })
-        }
-    });
-  }
-
   render(){
-    var tracks = this.state.topTracks.items;
 
     return (
       <div className="App">
         <a href = "http://localhost:8888">
           <Button variant="outline-secondary">Login With Spotify</Button>
         </a>
-
-        <div>
-          <Button variant="outline-secondary" onClick = {() => this.getMyTopTracksMonthly()}>
-            Get Top Tracks For Last Month
-          </Button>
-
-          <div>My Top Tracks:</div>
-          <div>
-            {tracks.map(track =>
-              <ListGroup>
-                <ListGroup.Item>{track.name}</ListGroup.Item>
-              </ListGroup>
-            )};
-          </div>
-        </div>
       </div>
     );
   }
