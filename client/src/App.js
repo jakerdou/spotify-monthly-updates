@@ -7,6 +7,7 @@ import Spotify from 'spotify-web-api-js';
 
 import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
+import ListGroup from 'react-bootstrap/ListGroup'
 
 const spot = new Spotify();
 
@@ -84,7 +85,6 @@ class App extends React.Component {
 
     $.ajax({
         type: 'GET',
-        url: 'https://dog.ceo/api/breeds/image/random',
         url: 'https://api.spotify.com/v1/me/top/tracks?time_range=short_term',
         headers: {
           'Authorization': 'Bearer ' + accessToken
@@ -119,14 +119,14 @@ class App extends React.Component {
           <Button variant="outline-secondary" onClick = {() => this.getMyTopTracksMonthly()}>
             Get Top Tracks For Last Month
           </Button>
-          <Badge pill variant="primary">
-            New
-          </Badge>
+
           <div>My Top Tracks:</div>
           <div>
             {tracks.map(track =>
-              <div>{track.name}
-              </div>)}
+              <ListGroup>
+                <ListGroup.Item>{track.name}</ListGroup.Item>
+              </ListGroup>
+            )};
           </div>
         </div>
       </div>
