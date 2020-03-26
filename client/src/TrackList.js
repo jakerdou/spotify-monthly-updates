@@ -20,7 +20,8 @@ class TrackList extends React.Component {
         items: [
           {name: "Not Checked Yet"}
         ]
-      }
+      },
+      alrt: ""
     }
 
     if (params.access_token) {
@@ -40,23 +41,31 @@ class TrackList extends React.Component {
   }
 
   getMyTopTracksMonthly() {
-    var accessToken = this.getHashParams().access_token;
-    var self = this;
 
-    $.ajax({
-        type: 'GET',
-        url: 'https://api.spotify.com/v1/me/top/tracks?time_range=short_term',
-        headers: {
-          'Authorization': 'Bearer ' + accessToken
-        },
-        success: function(response) {
-          self.setState({
-            topTracks: {
-              items: response.items
-            }
-          })
-        }
-    });
+    if(this.state.loggedIn == true) {
+      var accessToken = this.getHashParams().access_token;
+      var self = this;
+
+      $.ajax({
+          type: 'GET',
+          url: 'https://api.spotify.com/v1/me/top/tracks?time_range=short_term',
+          headers: {
+            'Authorization': 'Bearer ' + accessToken
+          },
+          success: function(response) {
+            self.setState({
+              topTracks: {
+                items: response.items
+              }
+            })
+          }
+      });
+    }
+    else {
+      this.setState({
+        alert: "You must log in before using this feature"
+      })
+    }
   }
 
   render(){
@@ -64,19 +73,19 @@ class TrackList extends React.Component {
 
     return (
       <div className="TrackList">
-        <div>
-          <Button variant="outline-secondary" onClick = {() => this.getMyTopTracksMonthly()}>
-            Get Top Tracks For Last Month
-          </Button>
+        <div id="alrt">{this.state.alert}</div>
 
-          <h3 id="TopArts">Your Top Tracks:</h3>
-          <div>
-            {tracks.map(track =>
-              <ListGroup>
-                <ListGroup.Item>{track.name}</ListGroup.Item>
-              </ListGroup>
-            )};
-          </div>
+        <Button variant="outline-secondary" onClick = {() => this.getMyTopTracksMonthly()}>
+          Get Top Tracks For Last Month
+        </Button>
+
+        <h3 id="TopArts">Your Top Tracks:</h3>
+        <div>
+          {tracks.map(track =>
+            <ListGroup>
+              <ListGroup.Item>{track.name}</ListGroup.Item>
+            </ListGroup>
+          )};
         </div>
       </div>
     );
