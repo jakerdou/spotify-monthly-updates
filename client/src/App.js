@@ -1,8 +1,6 @@
 //TODO: get shell script to run all necessary things
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import $ from "jquery";
 import Spotify from 'spotify-web-api-js';
 
 const spot = new Spotify();
