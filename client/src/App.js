@@ -40,9 +40,6 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <a href = "http://localhost:8888">
-          <Button variant="outline-secondary">Login With Spotify</Button>
-        </a>
       </div>
     );
   }

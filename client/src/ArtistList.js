@@ -49,7 +49,7 @@ class ArtistList extends React.Component {
 
       $.ajax({
           type: 'GET',
-          url: 'https://api.spotify.com/v1/me/top/artists?time_range=short_term',
+          url: 'https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=5',
           headers: {
             'Authorization': 'Bearer ' + accessToken
           },

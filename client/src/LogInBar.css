@@ -1,0 +1,15 @@
+.LogInBar {
+  text-align: center;
+  padding-right: 5%;
+  padding-left: 5%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+#loginJTron {
+  color: green
+}
+
+#loginLink {
+  text-decoration: none;
+}
