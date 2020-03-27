@@ -5,6 +5,7 @@ import Spotify from 'spotify-web-api-js';
 
 import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup'
+import Table from 'react-bootstrap/Table'
 
 import {getHashParams} from '../functions.js'
 
@@ -43,10 +44,21 @@ class TrackList extends React.Component {
             'Authorization': 'Bearer ' + accessToken
           },
           success: function(response) {
+            var imageArray = [];
+            var linkArray = [];
+
+            for (var i = 0; i < response.items.length; i++) {
+              const track = response.items[i];
+              imageArray.push(track.album.images[0].url)
+              linkArray.push(track.external_urls.spotify)
+            }
+
             self.setState({
               topTracks: {
                 items: response.items
-              }
+              },
+              imgs: imageArray,
+              links: linkArray
             })
           }
       });
@@ -55,6 +67,34 @@ class TrackList extends React.Component {
       this.setState({
         alert: "You must log in before using this feature"
       })
+    }
+  }
+
+  makeTrackTable() {
+    var table = [];
+    var children = [];
+    var tracks = this.state.topTracks.items
+    var imgs = this.state.imgs
+    var lnks = this.state.links
+
+    if (tracks.length > 1) {
+      for (var i = 0; i < this.state.topTracks.items.length; i++) {
+        children.push(<tr>
+          <td><a href={lnks[i]}>{tracks[i].name}</a></td>
+          <td><img class="trackImage" src={imgs[i]} /></td>
+          </tr>);
+      }
+
+      table.push(<Table striped bordered hover size="sm">
+          <tbody>
+            {children}
+          </tbody>
+        </Table>)
+
+      return table
+    }
+    else {
+
     }
   }
 
@@ -71,11 +111,7 @@ class TrackList extends React.Component {
 
         <h3 id="TopArts">Your Top Tracks:</h3>
         <div>
-          {tracks.map(track =>
-            <ListGroup>
-              <ListGroup.Item>{track.name}</ListGroup.Item>
-            </ListGroup>
-          )}
+          {this.makeTrackTable()}
         </div>
       </div>
     );

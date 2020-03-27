@@ -15,3 +15,8 @@
 #topArtBut {
   color: #1DB954;
 }
+
+.artistImage {
+  max-width: 30%;
+  max-height: 30%;
+}

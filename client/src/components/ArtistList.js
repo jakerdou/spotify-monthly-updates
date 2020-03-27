@@ -5,6 +5,7 @@ import Spotify from 'spotify-web-api-js';
 
 import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup'
+import Table from 'react-bootstrap/Table'
 
 import {getHashParams} from '../functions.js'
 
@@ -22,6 +23,8 @@ class ArtistList extends React.Component {
           {name: "Not Checked Yet"}
         ]
       },
+      imgs: [],
+      links: [],
       alert: ""
     }
 
@@ -43,10 +46,21 @@ class ArtistList extends React.Component {
             'Authorization': 'Bearer ' + accessToken
           },
           success: function(response) {
+            var imageArray = [];
+            var linkArray = [];
+
+            for (var i = 0; i < response.items.length; i++) {
+              const art = response.items[i];
+              imageArray.push(art.images[0].url)
+              linkArray.push(art.external_urls.spotify)
+            }
+
             self.setState({
               topArtists: {
-                items: response.items
-              }
+                items: response.items,
+              },
+              imgs: imageArray,
+              links: linkArray
             })
           }
       });
@@ -58,8 +72,37 @@ class ArtistList extends React.Component {
     }
   }
 
+  makeArtTable() {
+    var table = [];
+    var children = [];
+    var artists = this.state.topArtists.items
+    var imgs = this.state.imgs
+    var lnks = this.state.links
+
+    if (artists.length > 1) {
+      for (var i = 0; i < this.state.topArtists.items.length; i++) {
+        children.push(<tr>
+          <td><a href={lnks[i]}>{artists[i].name}</a></td>
+          <td><img class="artistImage" src={imgs[i]} /></td>
+          </tr>);
+      }
+
+      table.push(<Table striped bordered hover size="sm">
+          <tbody>
+            {children}
+          </tbody>
+        </Table>)
+
+      return table
+    }
+    else {
+
+    }
+  }
+
   render(){
     var artists = this.state.topArtists.items
+    var imgs = this.state.imgs
 
     //go back and look at ListGroup for more info
     return (
@@ -72,11 +115,7 @@ class ArtistList extends React.Component {
 
         <h3 id="TopArts">Your Top Artists:</h3>
         <div>
-          {artists.map(artist =>
-            <ListGroup>
-              <ListGroup.Item>{artist.name}</ListGroup.Item>
-            </ListGroup>
-          )}
+          {this.makeArtTable()}
         </div>
       </div>
     );

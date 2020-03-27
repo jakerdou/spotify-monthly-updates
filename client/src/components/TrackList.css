@@ -15,3 +15,8 @@
 #topTrackBut {
   color: #1DB954;
 }
+
+.trackImage {
+  max-width: 30%;
+  max-height: 30%;
+}
