@@ -4,6 +4,9 @@
   padding-left: 5%;
   padding-top: 3%;
   padding-bottom: 3%;
+  background-color: black;
+  border-style: solid;
+  border-color: #1DB954;
 }
 
 #loginJTron {

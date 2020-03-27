@@ -41,7 +41,7 @@ class ArtistList extends React.Component {
 
       $.ajax({
           type: 'GET',
-          url: 'https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=5',
+          url: 'https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=10',
           headers: {
             'Authorization': 'Bearer ' + accessToken
           },
@@ -82,12 +82,14 @@ class ArtistList extends React.Component {
     if (artists.length > 1) {
       for (var i = 0; i < this.state.topArtists.items.length; i++) {
         children.push(<tr>
-          <td><a href={lnks[i]}>{artists[i].name}</a></td>
-          <td><img class="artistImage" src={imgs[i]} /></td>
+          <td>
+            <div><img class="artistImage" src={imgs[i]} /></div>
+            <div class="artistName"><a href={lnks[i]}>{artists[i].name}</a></div>
+          </td>
           </tr>);
       }
 
-      table.push(<Table striped bordered hover size="sm">
+      table.push(<Table striped borderless hover size="sm" variant="dark">
           <tbody>
             {children}
           </tbody>

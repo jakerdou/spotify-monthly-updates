@@ -5,6 +5,9 @@
   padding-top: 3%;
   padding-bottom: 3%;
   color: #1DB954;
+  background-color: white;
+  border-style: solid;
+  border-color: #1DB954;
 }
 
 #alrt {
@@ -17,6 +20,11 @@
 }
 
 .artistImage {
-  max-width: 30%;
-  max-height: 30%;
+  max-width: 40%;
+  max-height: 40%;
+}
+
+.artistName {
+  text-align: center;
+  font-size: 2em;
 }
