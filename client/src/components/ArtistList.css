@@ -1,0 +1,30 @@
+.ArtistList {
+  text-align: center;
+  padding-right: 5%;
+  padding-left: 5%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  color: #1DB954;
+  background-color: white;
+  border-style: solid;
+  border-color: #1DB954;
+}
+
+#alrt {
+  color: red;
+  padding-bottom: .5%;
+}
+
+#topArtBut {
+  color: #1DB954;
+}
+
+.artistImage {
+  max-width: 40%;
+  max-height: 40%;
+}
+
+.artistName {
+  text-align: center;
+  font-size: 2em;
+}
