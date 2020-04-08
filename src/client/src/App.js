@@ -1,4 +1,3 @@
-//TODO: get shell script to run all necessary things
 import React from 'react';
 import './App.css';
 import Spotify from 'spotify-web-api-js';
